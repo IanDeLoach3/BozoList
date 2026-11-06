@@ -6,6 +6,14 @@ Built for **WoW Forever (1.60.1)** and Classic Era (1.15.x).
 
 ![Interface](https://img.shields.io/badge/Interface-16001%20%7C%2011509-c9a24b) ![Classic](https://img.shields.io/badge/WoW-Forever%201.60.1-8a2a26)
 
+<p align="center"><img src="images/bozo-list-window.png" width="420" alt="The Bozo List window"></p>
+
+<p align="center">
+  <img src="images/bozo-list-banner.png" width="360" alt="Warning banner">
+  <br>
+  <img src="images/bozo-list-nearby.png" width="250" alt="Nearby pop-up">
+</p>
+
 ---
 
 ## What it does
