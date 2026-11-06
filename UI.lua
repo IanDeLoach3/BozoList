@@ -33,7 +33,7 @@ local function Solid(parent, layer, r, g, b, a)
 end
 
 -- frame ----------------------------------------------------------------------
-local f = CreateFrame("Frame", "GrudgeLedgerFrame", UIParent, backdrop)
+local f = CreateFrame("Frame", "BozoListFrame", UIParent, backdrop)
 f:SetSize(400, 520)
 f:SetPoint("CENTER")
 f:SetFrameStrata("DIALOG")
@@ -44,7 +44,7 @@ f:RegisterForDrag("LeftButton")
 f:SetScript("OnDragStart", f.StartMoving)
 f:SetScript("OnDragStop", f.StopMovingOrSizing)
 f:Hide()
-if type(UISpecialFrames) == "table" then table.insert(UISpecialFrames, "GrudgeLedgerFrame") end
+if type(UISpecialFrames) == "table" then table.insert(UISpecialFrames, "BozoListFrame") end
 
 -- opaque parchment base so the frame is NEVER see-through
 local base = Solid(f, "BACKGROUND", PARCH[1], PARCH[2], PARCH[3], 1)
@@ -86,7 +86,7 @@ local title = f:CreateFontString(nil, "OVERLAY")
 Font(title, SCRIPT, 30)
 title:SetTextColor(unpack(INKH))
 title:SetPoint("TOP", 0, -24)
-title:SetText("Grudge Ledger")
+title:SetText("Bozo List")
 
 local sub = f:CreateFontString(nil, "OVERLAY")
 Font(sub, SCRIPT, 14)
@@ -175,7 +175,7 @@ listTop:SetPoint("TOPLEFT", 30, -92)
 listTop:SetPoint("TOPRIGHT", -30, -92)
 
 -- scroll + rows --------------------------------------------------------------
-local scroll = CreateFrame("ScrollFrame", "GrudgeLedgerScroll", f, "FauxScrollFrameTemplate")
+local scroll = CreateFrame("ScrollFrame", "BozoListScroll", f, "FauxScrollFrameTemplate")
 scroll:SetPoint("TOPLEFT", 28, -100)
 scroll:SetPoint("BOTTOMRIGHT", -40, 112)
 scroll:SetScript("OnVerticalScroll", function(self, offset)
@@ -270,7 +270,7 @@ addBtn:SetScript("OnClick", DoAdd)
 
 local clearBtn = MedButton("Burn Ledger", 110)
 clearBtn:SetPoint("BOTTOMRIGHT", -28, 36)
-clearBtn:SetScript("OnClick", function() StaticPopup_Show("GRUDGE_LEDGER_CLEAR") end)
+clearBtn:SetScript("OnClick", function() StaticPopup_Show("BOZOLIST_CLEAR") end)
 
 -- refresh / toggle -----------------------------------------------------------
 function ns.Refresh()
@@ -307,7 +307,7 @@ end
 f:SetScript("OnShow", function() ns.Refresh() end)
 
 -- on-screen warning banner ---------------------------------------------------
-local alert = CreateFrame("Frame", "GrudgeLedgerAlert", UIParent, backdrop)
+local alert = CreateFrame("Frame", "BozoListAlert", UIParent, backdrop)
 alert:SetSize(340, 58)
 alert:SetPoint("TOP", 0, -150)
 alert:SetFrameStrata("FULLSCREEN_DIALOG")
@@ -348,7 +348,7 @@ function ns.Alert(name, reason, context)
 end
 
 -- bottom-right "nearby" box (same parchment graphic) -------------------------
-local prox = CreateFrame("Frame", "GrudgeLedgerProximity", UIParent, backdrop)
+local prox = CreateFrame("Frame", "BozoListProximity", UIParent, backdrop)
 prox:SetSize(230, 96)
 prox:SetPoint("BOTTOMRIGHT", -16, 180)
 prox:SetFrameStrata("HIGH")
@@ -380,7 +380,7 @@ end
 
 local pHead = prox:CreateFontString(nil, "OVERLAY")
 Font(pHead, SCRIPT, 16); pHead:SetPoint("TOP", 0, -11); pHead:SetTextColor(0.55, 0.11, 0.09)
-pHead:SetText("Grudge Nearby")
+pHead:SetText("Bozo Nearby")
 local pRule = Solid(prox, "ARTWORK", BRONZE[1], BRONZE[2], BRONZE[3], 0.6)
 pRule:SetHeight(1); pRule:SetPoint("TOPLEFT", 14, -30); pRule:SetPoint("TOPRIGHT", -14, -30)
 

@@ -1,4 +1,4 @@
-package-as: GrudgeLedger
+package-as: BozoList
 
 enable-nolib-creation: no
 

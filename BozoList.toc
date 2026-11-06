@@ -1,9 +1,9 @@
 ## Interface: 11509, 16001
-## Title: Grudge Ledger
+## Title: Bozo List
 ## Notes: A weathered parchment ledger of players you'd rather avoid.
 ## Author: Ian
 ## Version: 1.0.0
-## SavedVariables: GrudgeLedgerDB
+## SavedVariables: BozoListDB
 
 Core.lua
 UI.lua

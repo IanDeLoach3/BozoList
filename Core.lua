@@ -1,10 +1,10 @@
 local ADDON, ns = ...
 
 -- Saved data -----------------------------------------------------------------
-GrudgeLedgerDB = GrudgeLedgerDB or {}
+BozoListDB = BozoListDB or {}
 
 local function DB()
-    local db = GrudgeLedgerDB
+    local db = BozoListDB
     db.entries = db.entries or {}
     db.settings = db.settings or {}
     local s = db.settings
@@ -41,7 +41,7 @@ end
 
 local INK = "|cffb22222"      -- ink-red header
 local function P(text)
-    (DEFAULT_CHAT_FRAME or ChatFrame1):AddMessage(INK .. "Grudge Ledger:|r " .. (text or ""))
+    (DEFAULT_CHAT_FRAME or ChatFrame1):AddMessage(INK .. "Bozo List:|r " .. (text or ""))
 end
 ns.Print = P
 
@@ -247,7 +247,7 @@ ev:SetScript("OnEvent", function(self, event, ...)
     if event == "PLAYER_LOGIN" then
         local n = 0
         for _ in pairs(DB().entries) do n = n + 1 end
-        P("ledger loaded \226\128\148 " .. n .. " name" .. (n == 1 and "" or "s") .. " recorded.  |cff9a7b55/gl|r to open.")
+        P("ledger loaded \226\128\148 " .. n .. " name" .. (n == 1 and "" or "s") .. " recorded.  |cff9a7b55/bl|r to open.")
     elseif event == "PLAYER_TARGET_CHANGED" then
         if s.warnTarget and UnitExists("target") and UnitIsPlayer("target") then
             Check(UnitName("target"), "targeted")
@@ -273,7 +273,7 @@ if ChatFrame_AddMessageEventFilter then
         if e then
             local why = e.reason or "on your ledger"
             if #why > 28 then why = why:sub(1, 27) .. "..." end
-            return false, "|cffcc2222[GRUDGE: " .. why .. "]|r " .. (msg or ""), author, ...
+            return false, "|cffcc2222[BOZO: " .. why .. "]|r " .. (msg or ""), author, ...
         end
         return false
     end
@@ -281,22 +281,22 @@ if ChatFrame_AddMessageEventFilter then
 end
 
 -- Slash commands -------------------------------------------------------------
-StaticPopupDialogs["GRUDGE_LEDGER_CLEAR"] = {
-    text = "Burn the entire Grudge Ledger?\nEvery name is lost for good.",
+StaticPopupDialogs["BOZOLIST_CLEAR"] = {
+    text = "Burn the entire Bozo List?\nEvery name is lost for good.",
     button1 = YES or "Yes",
     button2 = NO or "No",
     OnAccept = function()
-        GrudgeLedgerDB.entries = {}
+        BozoListDB.entries = {}
         if ns.Refresh then ns.Refresh() end
         P("the ledger is ash. A clean page.")
     end,
     timeout = 0, whileDead = true, hideOnEscape = true, preferredIndex = 3,
 }
 
-SLASH_GRUDGELEDGER1 = "/gl"
-SLASH_GRUDGELEDGER2 = "/grudge"
-SLASH_GRUDGELEDGER3 = "/blacklist"
-SlashCmdList["GRUDGELEDGER"] = function(msg)
+SLASH_BOZOLIST1 = "/bl"
+SLASH_BOZOLIST2 = "/bozo"
+SLASH_BOZOLIST3 = "/blacklist"
+SlashCmdList["BOZOLIST"] = function(msg)
     msg = msg or ""
     local cmd, rest = msg:match("^(%S*)%s*(.-)%s*$")
     cmd = (cmd or ""):lower()
@@ -314,12 +314,12 @@ SlashCmdList["GRUDGELEDGER"] = function(msg)
         end
         local ok, d = ns.Add(nm, reason)
         P(ok and ("inscribed |cffd4b483" .. d .. "|r.")
-            or "give a name, or target a player. Two-part names need quotes: |cff9a7b55/gl add \"First Last\" reason|r")
+            or "give a name, or target a player. Two-part names need quotes: |cff9a7b55/bl add \"First Last\" reason|r")
     elseif cmd == "remove" or cmd == "rem" or cmd == "del" then
         local ok, d = ns.Remove(rest)
         P(ok and ("struck |cffd4b483" .. (d or rest) .. "|r from the ledger.") or "that name isn't in the ledger.")
     elseif cmd == "clear" then
-        StaticPopup_Show("GRUDGE_LEDGER_CLEAR")
+        StaticPopup_Show("BOZOLIST_CLEAR")
     elseif cmd == "sound" then
         local s = DB().settings; s.sound = not s.sound
         P("warning sound " .. (s.sound and "on." or "off."))
@@ -334,17 +334,17 @@ SlashCmdList["GRUDGELEDGER"] = function(msg)
         if names[1] then
             P("names read: " .. table.concat(names, ", "))
         else
-            P("no names read \226\128\148 turn nameplates |cffd4b483ON|r (press V, and enable Friendly Players in Interface > Names), then stand near someone and /gl scan again.")
+            P("no names read \226\128\148 turn nameplates |cffd4b483ON|r (press V, and enable Friendly Players in Interface > Names), then stand near someone and /bl scan again.")
         end
     elseif cmd == "help" or cmd == "?" then
         P("commands:")
-        P("  |cff9a7b55/gl|r \226\128\148 open the ledger")
-        P("  |cff9a7b55/gl add <name> <reason>|r \226\128\148 (no name = your target)")
-        P("     two-part names need quotes: |cff9a7b55/gl add \"First Last\" reason|r")
-        P("  |cff9a7b55/gl remove <name>|r \226\128\148 full name, e.g. First Last")
-        P("  |cff9a7b55/gl clear|r \226\128\148 wipe the ledger")
-        P("  |cff9a7b55/gl sound|r \226\128\148 toggle the warning sound")
-        P("  |cff9a7b55/gl prox|r \226\128\148 toggle the bottom-right nearby pop-up")
+        P("  |cff9a7b55/bl|r \226\128\148 open the ledger")
+        P("  |cff9a7b55/bl add <name> <reason>|r \226\128\148 (no name = your target)")
+        P("     two-part names need quotes: |cff9a7b55/bl add \"First Last\" reason|r")
+        P("  |cff9a7b55/bl remove <name>|r \226\128\148 full name, e.g. First Last")
+        P("  |cff9a7b55/bl clear|r \226\128\148 wipe the ledger")
+        P("  |cff9a7b55/bl sound|r \226\128\148 toggle the warning sound")
+        P("  |cff9a7b55/bl prox|r \226\128\148 toggle the bottom-right nearby pop-up")
     else
         if ns.Toggle then ns.Toggle() else P("UI not loaded.") end
     end
