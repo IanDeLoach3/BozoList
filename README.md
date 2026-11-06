@@ -1,3 +1,5 @@
+<p align="center"><img src="images/bozo-list-wordmark.png" width="560" alt="Bozo List"></p>
+
 # Bozo List
 
 A weathered, medieval **blacklist** for World of Warcraft — keep a parchment ledger of the bozos who've wronged you, and get warned the moment one of them crosses your path.
