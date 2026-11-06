@@ -1,0 +1,9 @@
+package-as: GrudgeLedger
+
+enable-nolib-creation: no
+
+ignore:
+  - README.md
+  - CHANGELOG.md
+  - .pkgmeta
+  - .gitignore
